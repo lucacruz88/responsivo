@@ -1,0 +1,611 @@
+/* =========================================================
+   RESET GERAL
+   Remove margens/preenchimentos padrão do navegador e faz
+   com que padding/border entrem no cálculo da largura/altura
+   (box-sizing: border-box), evitando cálculos manuais de layout.
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Rolagem suave ao clicar em links do menu (ex: #Skills) */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f0ebe3;
+    min-height: 100vh; /* "min-height" em vez de "height" evita cortar conteúdo em telas pequenas */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Limita a largura máxima do conteúdo para não esticar demais em telas grandes */
+.limiteintrerfac {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+/* =========================================================
+   BOTÃO "VOLTAR AO TOPO"
+   Por padrão fica invisível (opacity:0) e sem receber cliques
+   (pointer-events:none). A classe ".mostrar" é adicionada pelo
+   script.js quando o usuário rola a página para baixo.
+   ========================================================= */
+.up-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #FAF9F6;
+    color: #000000;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.up-btn.mostrar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.up-btn i {
+    font-size: 24px;
+}
+
+.up-btn:hover {
+    background-color: #f31c1c;
+    color: #ffffff;
+}
+
+/* =========================================================
+   CABEÇALHO / MENU
+   ========================================================= */
+header {
+    padding: 40px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-nav {
+    gap: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FF0000;
+}
+
+.botaosup {
+    margin-top: -25px;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+/* =========================================================
+   TOPO / APRESENTAÇÃO (hero)
+   ========================================================= */
+section.toposite {
+    padding: 40px 4%;
+}
+
+section.toposite .flex {
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+    flex-wrap: wrap; /* permite empilhar imagem + texto em telas estreitas */
+}
+
+.toposite h1 {
+    color: #000000;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 100;
+    font-size: 58px;
+    line-height: 65px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* Efeito de "máquina de escrever" controlado em script.js */
+#typing {
+    color: #000000;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 100;
+    font-size: 58px;
+    line-height: 65px;
+    text-align: left;
+    border-right: 3px solid black; /* simula o cursor piscando */
+    white-space: pre-line;
+    overflow: hidden;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.toposite h1 span {
+    color: #FF0000;
+    font-size: 70px;
+    font-weight: 500;
+}
+
+.toposite h1 span:hover {
+    color: #000000;
+}
+
+.toposite .img img {
+    width: 70%;
+    max-width: 350px;
+}
+
+.botaofalecmg button {
+    font-family: BlinkMacSystemFont, system-ui, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #000000;
+    font-weight: 500;
+    padding: 10px 40px;
+    font-size: 18px;
+    background-color: #f0ebe3;
+    border: 3px solid #d2251283;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botaofalecmg button span {
+    color: #000000;
+}
+
+.botaofalecmg button:hover {
+    background-color: #f31c1c;
+    color: #f0ebe3;
+}
+
+/* Título padrão usado em várias seções (Skills, Portfólio, Sites...) */
+h2.titulo {
+    font-family: 'Libre Baskerville', serif;
+    color: #000000;
+    font-size: 42px;
+    text-align: center;
+}
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+section.Skills {
+    padding: 40px 4%;
+    text-align: center;
+}
+
+.Skills .titulo {
+    text-align: center;
+    width: 100%;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.Skills .flex {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.Skills .Skillsbox {
+    color: #000000;
+    padding: 40px;
+    transition: .2s;
+    margin-top: 50px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.Skills .Skillsbox:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #d2251283;
+}
+
+.Skills .Skillsbox i {
+    font-size: 65px;
+    color: rgb(252, 113, 75);
+}
+
+.Skills .Skillsbox h3 {
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+/* =========================================================
+   PORTFÓLIO (texto de introdução)
+   ========================================================= */
+section.portfolio-intro {
+    padding: 40px 4%;
+    text-align: center;
+}
+
+section.portfolio-intro .titulo {
+    text-align: center;
+    width: 100%;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+/* =========================================================
+   CARROSSÉIS (seções "Sites" e "Portfólio digital")
+   Estilo compartilhado dos cards de projeto.
+   ========================================================= */
+.container {
+    width: 100%;
+    overflow: visible; /* permite que o card cresça no hover sem cortar */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.carousel {
+    display: flex;
+    gap: 25px;
+    width: max-content;
+    overflow: visible;
+    flex-wrap: wrap; /* em telas pequenas os cards quebram linha em vez de estourar a tela */
+    justify-content: center;
+}
+
+.card {
+    cursor: pointer;
+    flex: 0 0 30%;
+    min-width: 260px; /* evita cards espremidos demais em telas médias */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.card .overlay {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Linha colorida na base do card */
+.card::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #ff513e;
+    bottom: 0;
+    left: 0;
+}
+
+.card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+.container:hover .card:not(:hover) {
+    opacity: 0.8;
+}
+
+/* =========================================================
+   SEÇÃO "SITES"
+   ========================================================= */
+.Sites {
+    width: 100%;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    padding: 0 4%;
+    position: relative;
+}
+
+.Sites .titulo {
+    text-align: left;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+/* Linha colorida sob o título */
+.Sites .titulo::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #ff513e;
+    bottom: 0;
+    left: 0;
+}
+
+@media (min-width: 768px) {
+    .Sites .titulo {
+        margin-left: 10%;
+    }
+}
+
+/* =========================================================
+   SEÇÃO "PORTFÓLIO DIGITAL"
+   ========================================================= */
+.Portfóliodig {
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding: 0 4%;
+    position: relative;
+}
+
+.Portfóliodig .titulo {
+    text-align: left;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.Portfóliodig .titulo::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #ff513e;
+    bottom: 0;
+    left: 0;
+}
+
+@media (min-width: 768px) {
+    .Portfóliodig .titulo {
+        margin-left: 10%;
+    }
+}
+
+/* =========================================================
+   MODAL DE VISUALIZAÇÃO DE PDF
+   ========================================================= */
+.modal {
+    display: none; /* controlado via JS (openPDF / closePDF) */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.close {
+    background: red;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    align-self: flex-end;
+}
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 500px;
+}
+
+@media (max-width: 900px) {
+    iframe { height: 400px; }
+}
+
+@media (max-width: 600px) {
+    iframe { height: 300px; }
+}
+
+/* =========================================================
+   SOBRE
+   ========================================================= */
+section.sobre {
+    padding: 40px 4%;
+    text-align: left;
+}
+
+.sobre .titulos {
+    font-family: 'Libre Baskerville', serif;
+    text-align: center;
+    width: 100%;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.conteudo-sobre {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.imgsobre img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+}
+
+.sobre .txtsobre {
+    color: #000000;
+    flex: 1;
+    text-align: left;
+    max-width: 500px;
+    min-width: 260px;
+}
+
+.sobre .txtsobre h2 {
+    font-size: 40px;
+}
+
+.sobre .txtsobre h2 span {
+    display: block;
+    color: #FF0000;
+}
+
+.sobre .txtsobre p {
+    margin: 20px 0;
+    text-align: left;
+    font-size: 18px;
+}
+
+.btns-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.linkedin-btn,
+.github-btn {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: inherit;
+}
+
+.linkedin-btn:hover {
+    color: #0A66C2;
+}
+
+.github-btn:hover {
+    color: #f31c1c;
+}
+
+/* =========================================================
+   RODAPÉ
+   (o comentário original aqui estava malformado — faltava "/*" —
+   o que quebrava a leitura do CSS a partir deste ponto)
+   ========================================================= */
+footer {
+    background-color: #000000 !important;
+    padding: 20px 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+footer .nav-link {
+    background: transparent !important;
+    box-shadow: none;
+    font-weight: 500 !important;
+    transition: color 0.3s ease-in-out !important;
+}
+
+footer .nav-link:hover {
+    color: #FF0000 !important;
+}
+
+footer p {
+    color: #FAF9F6 !important;
+    margin-top: 10px !important;
+    font-size: 14px !important;
+}
+
+/* =========================================================
+   RESPONSIVIDADE GERAL
+   Ajustes finos para celulares (o site original não tinha
+   nenhum tratamento específico para telas pequenas no hero).
+   ========================================================= */
+@media (max-width: 600px) {
+    .toposite h1,
+    #typing {
+        font-size: 36px;
+        line-height: 44px;
+        text-align: center;
+    }
+
+    .toposite h1 span {
+        font-size: 44px;
+    }
+
+    section.toposite .flex {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .botaofalecmg {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2.titulo,
+    .sobre .titulos {
+        font-size: 2em;
+    }
+
+    .card {
+        flex: 0 0 100%;
+    }
+}
